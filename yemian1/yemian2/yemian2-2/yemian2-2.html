@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>车主首页</title>
+    <style>
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .block {display: block;}
+
+        a {
+            text-decoration: none; /* 去除下划线 */
+            color: black; /* 设置字体颜色为黑色 */
+        }
+
+        .fs14{font-size: 14px;}
+
+        /* 新增的样式 */
+        .image-row {
+            display: flex;
+            justify-content: space-between; /* 在水平线上均匀分布图像 */
+        }
+        .image-row img {
+            width: 49%; /* 设置每个图像的宽度以放在同一水平线上 */
+        }
+
+        
+        /* 图片行样式 */
+        .image-row1 {
+            display: flex;
+            justify-content: space-between; /* 水平分布 */
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #fff; /* 为图片底部添加背景色，以防止滚动时内容重叠 */
+            padding: 10px; /* 添加适当的间距 */
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.1); /* 添加轻微阴影以区分内容 */
+        }
+
+         /* 图像和文字行样式 */
+         .image-text-row {
+            display: flex;
+            align-items:center; /* 垂直对齐方式为顶部对齐 */
+            margin: 20px 0; /* 设置上下间距 */
+        }
+        .image-text-row img {
+            width: 23%; /* 图片宽度 */
+        }
+
+        .shop-info {
+            margin-left: 20px; /* 文字内容距离图片的水平间距 */
+            color: #757575;
+            font-size: 12px;;
+        }
+       
+        
+        .shop-info .rating-orders,
+        .shop-info .address-distance {
+            display: flex;
+            justify-content: flex-start; /* 水平对齐方式为左对齐 */
+            margin: 8px 0; /* 设置上下间距 */
+        }
+        .shop-info .rating-orders div,
+        .shop-info .address-distance div {
+            margin-right: 15px; /* 设置每个元素之间的水平间距 */
+        }
+        .shop-info .address-distance .address {
+            margin-right: 90px; /* 控制“地址”与“距离”之间的水平间距 */
+        }
+
+        
+
+    </style>
+</head>
+
+<body> 
+    <a href="my-car.html">快捷添加爱车</a>
+
+
+
+    <!-- 将 tiemo.jpg 与 penqi.jpg 放在同一水平线上 -->
+    <div class="image-row">
+        <img src="tiemo.jpg" alt="">
+        <img src="penqi.jpg" alt="">
+    </div>
+    
+    <a href="mendian.html">
+        <img src="more.jpg" alt="" class="w100 block">
+    </a>
+
+    <!-- 店铺信息部分 -->
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">ETO智能车膜体验店</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 1</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">高潮路309号2号楼105室ETO</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">深圳玛莎拉蒂</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">深圳龙岗坂田街道五和大道945</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">松江手拉手艾仕得贴膜中心</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">上海市松江区泗泾镇九干路50号手拉手汽车港C1-7号</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">Baes one 汽车工坊 (惠南店)</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">上海浦东新区靖海路239弄1-3号</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">广汽埃安御桥店</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">上海浦东新区御桥路1377号</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">比亚迪金山店</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">金山区亭卫公路2285号</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+
+    <div class="image-text-row">
+        <img src="dianzhao.jpg" alt="暂未提供门店照">
+        <div class="shop-info">
+            <div class="fs14">卡施达理想交付中心</div>
+            <div class="rating-orders">
+                <div>总评分: 0</div> <!-- 示例评分 -->
+                <div>总订单: 0</div> <!-- 示例订单数 -->
+            </div>
+            <div class="address-distance">
+                <div class="address">陕西省西安市长安区神州六号和航开路交叉口向东150米</div>
+                <div class="distance">12332.5km</div>
+            </div>
+        </div>    
+    </div>
+    <!-- 固定在页面底部的图片 -->
+    <div class="image-row1">
+        <a href="yemian2-2.html">
+            <img src="house2.jpg" alt="" class="block" style="width: 65%;">
+        </a>
+        <a href="mendian.html">
+            <img src="dianpu1.jpg" alt="" class="block" style="width: 65%;">
+        </a>
+        <a href="geren.html">
+            <img src="my1.jpg" alt="" class="block" style="width: 65%;">
+        </a>
+    </div>
+</body>
+
+</html>

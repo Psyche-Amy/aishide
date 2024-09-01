@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>关于我们</title>
+    <style>
+
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .block {display: block;}
+
+        .border-bottom1 {border-bottom: solid thin #787676;width: 98vw;}
+        .fs{font-size: 13px;color: #787676;}
+
+        .line1{line-height: 50px;}
+
+        /* 图片行样式 */
+        .image-row1 {
+            display: flex;
+            justify-content: space-between; /* 水平分布 */
+            position: fixed;
+            bottom: 0;         
+            left: 15%;
+        }
+
+        /* 留言框样式 */
+        .message-box {
+            width: 80%;
+            height: 100px;
+            background-color: #f3f6f8; /* 留言背景颜色 */
+         
+            padding: 28px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #424242;
+            position: relative;
+        }
+
+        /* 提示文字样式 */
+        .placeholder-text {
+            position: absolute;
+            top: 10px;
+            left: 15px;
+            color: #9e9e9e;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .message-box input:focus + .placeholder-text,
+        .message-box input:not(:placeholder-shown) + .placeholder-text {
+            opacity: 0;
+        }
+
+        .message-box textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            outline: none;
+            background-color: transparent;
+            resize: none;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="border-bottom1">
+        <a href="root.html" style="text-decoration: none;">
+            <img src="fan2.jpg" style="width: 22%;">
+        </a>    
+    </div>    
+
+    <div class="fs line1">建议反馈留言</div>
+
+    <!-- 留言框容器 -->
+    <div class="message-box">
+        <textarea id="message-input"></textarea>
+        <div class="placeholder-text">您有什么建议想对我们说呢？请留言并提交反馈吧~</div>
+    </div>
+
+    <div class="image-row1">
+        <img src="tijiao.jpg" style="width: 80%;">
+    </div>
+
+    <script>
+        // JavaScript用于控制提示文字的显示和隐藏
+        const messageInput = document.getElementById('message-input');
+        const placeholderText = document.querySelector('.placeholder-text');
+
+        messageInput.addEventListener('input', function() {
+            if (messageInput.value.trim() !== '') {
+                placeholderText.style.opacity = '0';
+            } else {
+                placeholderText.style.opacity = '1';
+            }
+        });
+    </script>
+</body>
+</html>

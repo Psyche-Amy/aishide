@@ -1,0 +1,375 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配方管理</title>
+    <style>
+        /* 全局样式 */
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            margin: 0px auto;
+        }
+        .white-box {
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 87vw;
+            align-items: center;
+            margin-left: 3%;
+        }
+       
+        .label, .value {
+            font-size: 16px;
+            color: #333;
+        }
+        .value {
+            width: 60%;
+            text-align: right;
+        }
+        .van-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .van-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+         /* 图片样式 */
+         .van-col img {
+            margin-right: -175px; /* 图片与文字之间的间距 */
+           
+        }
+
+        /* 标题样式 */
+        .van-col h4 {
+            margin: 0;
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 100%;
+        }
+        .log-entry {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+        }
+        .expand-button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .scan-info {
+            font-size: 14px;
+            color: rgb(197, 20, 20);
+            margin-left: -170px;
+            font-weight: bold;
+        }
+
+        /* 插图样式 */
+        .jinggao1-image {
+            width: 100%;
+            display: flex;
+            justify-content: center; /* 水平居中 */
+            align-items: center;    /* 垂直居中 */
+        }
+
+        .jinggao1-image img {
+            width: 100%; /* 全覆盖视口宽度 */
+            height: auto;
+        }
+
+        .jinggao-image img {
+            width: 100%;
+            height: auto;
+        }
+
+
+         /* 将 biaoshi3.jpg 固定在页面右侧中间位置 */
+         .fixed-image {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+    </style>
+</head>
+<body>
+    <a href="jilu.html">
+        <div class="jinggao1-image"><img src="fan5.jpg" alt="fan4 Image"></div> 
+    </a>
+    
+    <div class="container">  
+        <!-- 验证结果白框 -->
+        <div class="w100" id="verification-box">
+            <!-- 动态内容将在此显示 -->
+        </div>
+
+        <img src="biaoshi3.jpg" class="fixed-image" alt="右侧固定图片">
+        <!-- 产品信息白框 -->
+        <div class="white-box">
+            <div class="van-row">
+                <div class="van-col" style="margin-right: 315px;">
+                    <img src="biaoshi1.jpg">
+                    <h4>产品信息:</h4>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">产品代号</div>
+                    <div class="value">668R</div>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">产品名称</div>
+                    <div class="value">2K钣金腻子</div>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">品牌</div>
+                    <div class="value">Cromax®科丽晶®</div>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">包装规格</div>
+                    <div class="value">3.5公斤</div>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">生产批号</div>
+                    <div class="value">4070</div>
+                </div>
+            </div>
+            <div class="van-row">
+                <div class="van-col">
+                    <div class="label">生产日期</div>
+                    <div class="value">见罐底喷码</div>
+                </div>
+            </div>
+        </div>
+
+        
+
+        <!-- 访问日志显示白框 -->
+        <div class="white-box">
+            <div class="van-col">
+                <img src="biaoshi2.jpg">
+                <h4>扫码信息:</h4>
+                <span class="scan-info" id="scan-info">扫码0人0次</span>
+                <button class="expand-button" id="toggle-log">展开</button>
+            </div>
+            <div id="visit-log" style="display: none; font-size: 16px;"></div>
+        </div>
+
+        <div class="image-container">
+            <img src="jifen.jpg" alt="积分图片">
+        </div>
+
+        
+
+    </div>  
+
+    <script>
+        // 获取访问时间
+        function getVisitTime() {
+            const now = new Date();
+            return now.toLocaleString('zh-CN', {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: '2-digit',
+                minute: '2-digit',
+                second: '2-digit',
+            });
+        }
+
+        // 获取地理位置
+        function updateLocation(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // 使用逆地理编码API获取具体位置
+            const apiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=zh`;
+            
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    const address = `${data.principalSubdivision} ${data.city} ${data.locality || data.localityInfo.administrative[2].name}`;
+                    document.getElementById('address').textContent = address;
+                    logVisit(address);
+                })
+                .catch(error => {
+                    const errorMsg = '无法获取位置';
+                    document.getElementById('address').textContent = errorMsg;
+                    logVisit(errorMsg);
+                    console.error('Error fetching location:', error);
+                });
+        }
+
+        function handleLocationError() {
+            const errorMsg = '位置获取失败';
+            document.getElementById('address').textContent = errorMsg;
+            logVisit(errorMsg);
+        }
+
+        // 记录访问日志并保存到localStorage
+        function logVisit(address) {
+            const time = getVisitTime();
+
+            // 构建访问日志条目
+            const logEntry = { address, time };
+
+            // 从localStorage中获取当前日志
+            let visitLog = JSON.parse(localStorage.getItem('visitLog')) || [];
+            let uniqueVisitors = JSON.parse(localStorage.getItem('uniqueVisitors')) || {};
+
+            // 增加访问次数
+            visitLog.push(logEntry);
+
+            // 使用地址作为唯一标识符记录访问者
+            if (!uniqueVisitors[address]) {
+                uniqueVisitors[address] = true;
+            }
+
+            // 更新localStorage中的日志
+            localStorage.setItem('visitLog', JSON.stringify(visitLog));
+            localStorage.setItem('uniqueVisitors', JSON.stringify(uniqueVisitors));
+
+            // 更新页面显示
+            displayLog(visitLog);
+            updateScanInfo(Object.keys(uniqueVisitors).length, visitLog.length);
+            displayVerificationMessage(visitLog.length);
+        }
+
+        // 显示首次或多次访问的提示信息
+        function displayVerificationMessage(visitCount) {
+            const verificationBox = document.getElementById('verification-box');
+            
+            if (visitCount === 1) {
+                verificationBox.innerHTML = `
+                    <div class="jinggao-image"><img src="pass3.jpg" alt="jinggao Image"></div> 
+                `;
+            } else {
+                verificationBox.innerHTML = `     
+                    <div class="jinggao-image"><img src="jinggao.jpg" alt="jinggao Image"></div> 
+                `;
+            }
+        }
+
+        // 更新扫码次数信息
+        function updateScanInfo(uniqueVisitorCount, visitCount) {
+            const scanInfo = document.getElementById('scan-info');
+            scanInfo.textContent = `扫码${uniqueVisitorCount}人${visitCount}次`;
+        }
+
+        // 在页面上显示访问日志
+        function displayLog(logEntries) {
+            const visitLog = document.getElementById('visit-log');
+            visitLog.innerHTML = '';
+
+            logEntries.forEach(entry => {
+                const logDiv = document.createElement('div');
+                logDiv.className = 'log-entry';
+                logDiv.innerHTML = `
+                    <div>${entry.address}</div>
+                    <div>${entry.time}</div>
+                `;
+                visitLog.appendChild(logDiv);
+            });
+        }
+
+        // 初始化页面时加载日志
+        function init() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(updateLocation, handleLocationError);
+            } else {
+                handleLocationError();
+            }
+
+            // 从localStorage中加载访问日志并显示
+            const visitLog = JSON.parse(localStorage.getItem('visitLog')) || [];
+            displayLog(visitLog);
+
+            // 更新扫码信息
+            const uniqueVisitors = JSON.parse(localStorage.getItem('uniqueVisitors')) || {};
+            updateScanInfo(Object.keys(uniqueVisitors).length, visitLog.length);
+
+            // 显示访问验证信息
+            displayVerificationMessage(visitLog.length);
+
+            // 展开/收起日志
+            document.getElementById('toggle-log').addEventListener('click', function () {
+                const log = document.getElementById('visit-log');
+                if (log.style.display === 'none') {
+                    log.style.display = 'block';
+                    this.textContent = '收起';
+                } else {
+                    log.style.display = 'none';
+                    this.textContent = '展开';
+                }
+            });
+        }
+
+        window.onload = init;
+
+        // 检查并记录访问次数
+        const pageVisitKey = "product1VisitCount";
+        let visitCount = localStorage.getItem(pageVisitKey) || 0;
+        visitCount = parseInt(visitCount) + 1;
+        localStorage.setItem(pageVisitKey, visitCount);
+
+        // 根据访问次数设置验证状态
+        let status = "";
+        if (visitCount === 1) {
+            status = "已验证";
+        } else {
+            status = "有伪造风险";
+        }
+
+        // 显示验证状态
+        alert(`防伪码验证状态: ${status}`);
+
+        // 存储验证结果到 localStorage
+        const productInfo = {
+            productName: "NS680-02慢干固剂(1升罐装)",  // 假设产品名固定
+            antiFakeCode: "2979886304022021",  // 假设固定的防伪码
+            status: status,
+            time: new Date().toLocaleString(),
+            points: visitCount === 1 ? 100 : 0,  // 仅首次访问获得积分
+            productPage: window.location.href
+        };
+
+        let records = JSON.parse(localStorage.getItem('records')) || [];
+        records.push(productInfo);
+        localStorage.setItem('records', JSON.stringify(records));
+    </script>
+    
+   
+</body>
+</html>

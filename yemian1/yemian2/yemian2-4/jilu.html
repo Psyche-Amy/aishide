@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防伪记录</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .w100 { width: 100%; }
+        .container {
+            width: 86%;
+            margin: 0px auto;
+            padding: 20px;
+        }
+        .white-box {
+            background-color: #ffffff;
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+        }
+        .record-item {
+            border-bottom: 1px solid #e0e0e0;
+            padding: 10px 0;
+            display: flex;
+            justify-content: space-between;
+        }
+        .record-item:last-child {
+            border-bottom: none;
+        }
+        .record-info {
+            flex-direction: column;
+        }
+        .record-info p {
+            display: flex;
+            justify-content: space-between;
+        }
+        .label {
+            text-align: left;
+            flex: 1;
+        }
+        .value {
+            text-align: right;
+        }
+        .points {
+            color: #ff5722;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>防伪记录</h1>
+        <div class="white-box" id="record-list">
+            <!-- 动态生成的记录条目 -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let records = [];
+
+            // 遍历 localStorage 中所有产品记录
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                if (key.startsWith('product_')) {
+                    let productData = JSON.parse(localStorage.getItem(key));
+
+                    let record = {
+                        productName: productData.productName,
+                        antiFakeCode: productData.fangweima,
+                        time: new Date().toLocaleString(),
+                        status: "已验证",  // 默认状态
+                        points: "+0"      // 默认积分奖励
+                    };
+
+                    records.push(record);
+                }
+            }
+
+            // 按时间降序排列记录
+            records.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+            const recordList = document.getElementById('record-list');
+
+            if (records.length === 0) {
+                recordList.innerHTML = '<p>目前没有防伪记录。</p>';
+            } else {
+                records.forEach(record => {
+                    const recordItem = document.createElement('div');
+                    recordItem.classList.add('record-item');
+                    recordItem.innerHTML = `
+                        <div class="record-info w100">
+                            <p>
+                                <span class="label">产品名:</span>
+                                <span class="value">${record.productName}</span>
+                            </p>
+                            <p>
+                                <span class="label">防伪码</span>
+                                <span class="value">${record.antiFakeCode}</span>
+                            </p>
+                            <p>
+                                <span class="label">防伪码验证状态</span>
+                                <span class="value">${record.status}</span>
+                            </p>
+                            <p>
+                                <span class="label">扫码日期</span>
+                                <span class="value">${record.time}</span>
+                            </p>
+                            <p>
+                                <span class="label">积分奖励</span>
+                                <span class="value">${record.points}</span>
+                            </p>
+                        </div>
+                    `;
+                    recordList.appendChild(recordItem);
+                });
+            }
+        });
+    </script>
+</body>
+</html>

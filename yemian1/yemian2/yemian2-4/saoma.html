@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>扫一扫</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: black;
+    }
+
+    #video {
+      width: 100%;
+      height: auto;
+    }
+
+    #overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+
+    .scan-area {
+      border: 3px solid yellow;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80%;
+      height: 30%;
+    }
+  </style>
+</head>
+<body>
+ 
+<video id="video" autoplay></video>
+<canvas id="overlay"></canvas>
+ 
+<div class="scan-area"></div>
+<script src="https://cdn.jsdelivr.net/npm/jsqr@latest/dist/jsQR.js"></script>
+<!-- 请确保正确引入 jsQR 库 <script src="path/to/jsQR.min.js"></script> -->
+<script>
+  const video = document.getElementById('video');
+  const overlay = document.getElementById('overlay');
+  const scanArea = document.querySelector('.scan-area');
+  const canvasContext = overlay.getContext('2d');
+
+  let stream;
+  let scanning = true;
+
+  // 获取摄像头权限并开始播放视频流
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment" } })
+    .then(function(s) {
+      stream = s;
+      video.srcObject = stream;
+      video.play();
+
+      // 开始扫描
+      // requestAnimationFrame(scan);
+      const interval = setInterval(scan,1000)
+    })
+    .catch(function(err) {
+      console.error("无法访问摄像头：", err);
+    });
+
+  // 扫描二维码
+  function scan() {
+    if (scanning) {
+      const videoWidth = video.videoWidth;
+      const videoHeight = video.videoHeight;
+
+      // 设置画布大小
+      overlay.width = videoWidth;
+      overlay.height = videoHeight;
+
+      // 将视频帧绘制到画布上
+      canvasContext.drawImage(video, 0, 0, videoWidth, videoHeight);
+
+      // 获取扫描区域的坐标和尺寸
+      const scanAreaRect = scanArea.getBoundingClientRect();
+      const scanAreaX = scanAreaRect.left;
+      const scanAreaY = scanAreaRect.top;
+      const scanAreaWidth = scanAreaRect.width;
+      const scanAreaHeight = scanAreaRect.height;
+
+      // 获取扫描区域的图像数据
+      const imageData = canvasContext.getImageData(scanAreaX, scanAreaY, scanAreaWidth, scanAreaHeight);
+
+      // 使用 jsQR 库解码二维码
+      const code = jsQR(imageData.data, imageData.width, imageData.height);
+
+      // 如果成功解码，则停止扫描并处理结果
+      if (code) {
+        scanning = false;
+        handleScanResult(code.data);
+        clearInterval(interval);
+      } else {
+        requestAnimationFrame(scan);
+      }
+    }
+  }
+
+  // 获取链接参数
+  function getQueryParams(arg){
+    var params = {};
+    var parser = document.createElement('saomaValue');
+    parser.href = arg
+    var query = parser.search.substring(1);
+    var vars = query.split('&');
+    for ( i = 0 ;i < vars.length ;i++) {
+        var element = vars[i].split('=');
+        params[decodeURIComponent(pair[0])] = decodeURIComponent(pair[1]);
+    }
+    return params
+  }
+  handleScanResult('www.baidu.con/?id=1')
+  // 处理扫描结果
+  function handleScanResult(data) {
+    const params = new URLSearchParams("?" + data.replace(/.*\?/,''))
+    window.location.assign("https://www.lozky.com/aishide/yemian1/yemian2/yemian2-4/product1.html?id=" + params.get("id"))
+    // 这里可以根据扫描结果进行相应的操作，例如跳转到链接或显示信息
+  }
+
+</script>
+
+</body>
+</html>

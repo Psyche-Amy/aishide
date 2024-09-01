@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>艾仕得服务中心</title>
+    <style>
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .block {display: block;}
+
+        .container {
+            position: relative;
+            width: 100%;
+        }
+        .img1 {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 2;
+            opacity: 1; /* 控制透明度，调整覆盖效果 */
+        }
+        .img2 {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            top: 180px; /* 根据需要调整位置 */
+        }
+        .img-others {
+            width: 100%;
+            display: block;
+            margin-top: 180px; /* 保持与上一张图片的间距，防止重叠 */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="aishide1.jpg" alt="" class="img1">
+        <!-- 将 aishide2.jpg 设置为可点击的链接，跳转到 zhuye2-1.html -->
+        <a href="yemian2-1\zhuye2-1.html">
+            <img src="aishide2.jpg" alt="" class="img2">
+        </a>
+
+        <a href="yemian2-2\yemian2-2.html">
+            <img src="aishide3.jpg" alt="" class="img-others">
+        </a>
+        <img src="aishide4.jpg" alt="" class="w100 block">
+        <a href="yemian2-4\root.html">  
+            <img src="aishide5.jpg" alt="" class="w100 block">
+        </a>
+    </div>
+
+    
+</body>
+</html>

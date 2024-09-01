@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配方管理</title>
+    <style>
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .block {display: block;}
+
+        /* 新增的样式 */
+        .image-row {
+            display: flex;
+            justify-content: space-between; /* 在水平线上均匀分布图像 */
+        }
+        .image-row img {
+            width: 49vw; /* 设置每个图像的宽度以放在同一水平线上 */
+        }
+    </style>
+</head>
+
+<body>
+
+    <img src="aishide6.jpg" alt="" class="w100 block">
+    <img src="aishide7.png" alt="" class="w100 block">
+
+    <!-- 将 aishide8.jpg 与 aishide9.jpg 放在同一水平线上 -->
+    <div class="image-row">
+        <a href="../yemian2-2/geren.html">
+            <img src="aishide8.jpg" alt="">
+        </a>    
+        <img src="aishide9.jpg" alt="">
+    </div>
+
+</body>
+</html>

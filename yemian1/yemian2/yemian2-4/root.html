@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人中心</title>
+    <style>
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .block {display: block;}
+
+        .border-bottom1 {border-bottom: solid thin #ececec;width: 90vw;}
+
+        /* 白色框样式 */
+        .container {
+            background-color: #ffffff; /* 白色背景 */
+            padding: 20px; /* 内边距 */
+            border: 1px solid #ddd; /* 边框 */
+            border-radius: 8px; /* 圆角 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* 阴影 */
+            position: relative;
+            margin: 0 auto; /* 居中对齐 */
+        }
+
+        .line1{line-height: 35px;}
+
+      
+
+        /* 图像和文字行样式 */
+        .image-text-row {
+    display: flex;
+    justify-content: space-between; /* 文字和图片两端对齐 */
+    align-items: center; /* 让内容在行高范围内垂直居中对齐 */
+    margin-bottom: 5px; /* 设置行之间的下间距 */
+}
+
+.image-text-row img:first-child {
+    width: 9%; /* 首张图片的宽度 */
+}
+
+.shop-info {
+    margin-left: 15px; /* 文字内容距离图片的水平间距 */
+    color: #757575;
+    font-size: 16px;
+    flex-grow: 1; /* 让文字部分填充可用空间 */
+    line-height: 1.2; /* 调整行内文字的行高以保持垂直居中 */
+}
+
+.image-text-row img:last-child {
+    width: 6%; /* 最后一张图片的宽度 */
+    margin-left: auto; /* 自动填充左侧的空白，确保右对齐 */
+}
+
+
+        .image-row {
+            display: flex;
+            justify-content: space-between; /* 在水平线上均匀分布图像 */
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container"  style="width: 90%;">
+        <img src="kuaijie.jpg" alt="快捷扫码" class="w100" id="scan-trigger">
+        <div class="image-row">
+            <a href="jilu.html" style="text-decoration: none;color: inherit; "><div>扫码记录</div> </a>   
+            <div>扫码积分明细</div>
+        </div>
+    </div>
+    <div class="container" style="width: 90%;">
+        <a href="message.html" style="text-decoration: none;">
+            <div class="image-text-row border-bottom1" style="height: 50px;">
+                <img src="xinxi.jpg" alt="信息">
+                <div class="shop-info">
+                    <div>个人信息</div>
+                </div>
+                <img src="check.jpg" alt="检查">
+            </div>
+        </a>
+    
+        <div class="image-text-row border-bottom1" style="height: 60px;">
+            <img src="kefu.jpg" alt="客服">
+            <div class="shop-info">
+                <div>联系客服</div>
+            </div>
+            <img src="check.jpg" alt="检查">
+        </div>
+    
+        <a href="liuyan.html" style="text-decoration: none;">
+            <div class="image-text-row border-bottom1" style="height: 70px;">
+                <img src="fankui.jpg" alt="反馈">
+                <div class="shop-info">
+                    <div>建议反馈</div>
+                </div>
+                <img src="check.jpg" alt="检查">
+            </div>
+        </a>
+    
+        <a href="jianjie.html" style="text-decoration: none;">
+            <div class="image-text-row border-bottom1" style="height: 80px;">
+                <img src="learn.jpg" alt="关于我们">
+                <div class="shop-info">
+                    <div>关于我们</div>
+                </div>
+                <img src="check.jpg" alt="检查">
+            </div>
+        </a>     
+    </div>
+    
+    <script>
+        // 点击图片进入扫码页面
+        document.getElementById('scan-trigger').addEventListener('click', function () {
+            window.location.href = "saoma.html";
+        });
+    </script>
+</body>
+</html>

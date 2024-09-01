@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>选择车型</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .letter-group {
+            margin-bottom: 5px;
+            text-align: left;
+        }
+        .letter-group h2 {
+            margin: 0;
+            font-size: 17px;
+            color: #333;
+            background-color: #ededed; /* 暗色背景 */
+            padding: 9px 10px; /* 内边距 */
+            width: 100vw;
+            display: block; /* 使背景适应内容 */
+            box-sizing: border-box; /* 确保 padding 不影响元素宽度 */
+        }
+        .Car-list {
+            list-style-type: none;
+            padding: 0;
+            margin: 10px;
+            display: block;
+            flex-wrap: wrap;
+        }
+        .Car-list li {
+            margin-right: 50px;
+            cursor: pointer;
+            color: #4e4f50;
+        }
+        .Car-list li:hover {
+            text-decoration: underline;
+        }
+
+        .selected-city {
+            border: 2px solid #ffffff; /* 白色边框 */
+            padding: 5px;
+            border-radius: 5px;
+            background-color: #f0f0f0; /* 背景颜色 */
+            margin-bottom: 10px;
+        }
+        .city-actions {
+            margin-top: 10px;
+        }
+        .city-actions button {
+            margin-right: 10px;
+            padding: 5px 10px;
+            border: none;
+            background-color: #007BFF;
+            color: #fff;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .city-actions button:hover {
+            background-color: #0056b3;
+        }
+        .city-actions .delete-btn {
+            background-color: #dc3545;
+        }
+        .city-actions .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .line14{line-height: 58px;}
+        .line15{line-height: 50px;}
+        .line16{line-height: 70px;}
+
+        .image-row {
+            display: flex;
+            justify-content: space-between; /* 在水平线上均匀分布图像 */
+        }
+
+        .border-bottom1 {border-bottom: solid thin #989898;width: 100vw;}
+    </style>
+</head>
+
+<body>
+    
+
+    <!-- 创建按字母排列的城市选择栏 -->
+    <div class="letter-group line14">
+        <h2>热门品牌</h2>
+        <u1 class="line15 image-row Car-list li:hover">
+            <li onclick="selectCar('JEEP')">JEEP</li>
+            <li onclick="selectCar('MINI')">MINI</li>
+            <li onclick="selectCar('奥迪')">奥迪</li>
+            <li onclick="selectCar('宝马')">宝马</li>
+            <li onclick="selectCar('宝沃')">宝沃</li>
+        </u1>
+        <u1 class="line16  Car-list li:hover" style="display: flex;">
+            <li onclick="selectCar('保时捷')">保时捷</li>
+            <li onclick="selectCar('奔驰')">奔驰</li>
+        </u1>
+
+        <h2>A</h2>
+        <ul class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('ARCFOC极狐')">ARCFOC极狐</li>
+            <li class="border-bottom1" onclick="selectCar('阿尔法罗密欧')">阿尔法罗密欧</li>
+            <li class="border-bottom1" onclick="selectCar('阿斯顿马丁')">阿斯顿马丁</li>
+            <li  onclick="selectCar('奥迪')">奥迪</li>
+        </ul>
+    
+ 
+        <h2>B</h2>
+        <ul class="Car-list" >
+            <li class="border-bottom1" onclick="selectCar('宝马')">宝马</li>
+            <li class="border-bottom1" onclick="selectCar('宝沃')">宝沃</li>
+            <li class="border-bottom1" onclick="selectCar('保时捷')">保时捷</li>
+            <li class="border-bottom1" onclick="selectCar('本田')">本田</li>
+            <li class="border-bottom1" onclick="selectCar('比亚迪')">比亚迪</li>
+            <li class="border-bottom1" onclick="selectCar('标致')">标致</li>
+            <li class="border-bottom1" onclick="selectCar('别克')">别克</li>
+            <li  onclick="selectCar('宾利')">宾利</li>
+        </ul>
+   
+        <!-- 添加更多字母和城市 -->
+  
+        <h2>D</h2>
+        <ul class="Car-list">
+            <li onclick="selectCar('大众')">大众</li>
+        </ul>
+
+        <h2>F</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('法拉利')">法拉利</li>
+            <li class="border-bottom1" onclick="selectCar('丰田')">丰田</li>
+            <li onclick="selectCar('福特')">福特</li>
+        </u1>
+
+        <h2>H</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('哈弗')">哈弗</li>
+            <li onclick="selectCar('红旗')">红旗</li>
+        </u1>
+
+        <h2>J</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('JEEP')">JEEP</li>
+            <li class="border-bottom1" onclick="selectCar('捷豹')">捷豹</li>
+            <li onclick="selectCar('捷尼赛思')">捷尼赛思</li>
+        </u1>
+
+        <h2>K</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('凯迪拉克')">凯迪拉克</li>
+            <li onclick="selectCar('克莱斯勒')">克莱斯勒</li>
+        </u1>
+
+        <h2>L</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('兰博基尼')">兰博基尼</li>
+            <li class="border-bottom1" onclick="selectCar('岚图')">岚图</li>
+            <li class="border-bottom1" onclick="selectCar('劳斯莱斯')">劳斯莱斯</li>
+            <li class="border-bottom1" onclick="selectCar('雷克萨斯')">雷克萨斯</li>
+            <li class="border-bottom1" onclick="selectCar('理想')">理想</li>
+            <li class="border-bottom1" onclick="selectCar('林肯')">林肯</li>
+            <li class="border-bottom1" onclick="selectCar('领克')">领克</li>
+            <li class="border-bottom1" onclick="selectCar('路虎')">路虎</li>
+            <li onclick="selectCar('路特斯')">路特斯</li>
+        </u1>
+
+        <h2>M</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('MINI')">MINI</li>
+            <li class="border-bottom1" onclick="selectCar('马自达')">马自达</li>
+            <li class="border-bottom1" onclick="selectCar('玛莎拉蒂')">玛莎拉蒂</li>
+            <li class="border-bottom1" onclick="selectCar('迈凯伦')">迈凯伦</li>
+            <li onclick="selectCar('名爵')">名爵</li>
+        </u1>
+
+        <h2>O</h2>
+        <u1 class="Car-list">
+            <li onclick="selectCar('讴歌')">讴歌</li>
+        </u1>
+
+        <h2>P</h2>
+        <u1 class="Car-list">
+            <li onclick="selectCar('Polestar')">Polestar</li>
+        </u1>
+
+        <h2>Q</h2>
+        <u1 class="Car-list">
+            <li onclick="selectCar('起亚')">起亚</li>
+        </u1>
+
+        <h2>R</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('日产')">日产</li>
+            <li onclick="selectCar('荣威')">荣威</li>
+        </u1>
+
+        <h2>S</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('塞力斯')">塞力斯</li>
+            <li class="border-bottom1" onclick="selectCar('三菱')">三菱</li>
+            <li class="border-bottom1" onclick="selectCar('斯巴鲁')">斯巴鲁</li>
+            <li onclick="selectCar('斯柯达')">斯柯达</li>
+        </u1>
+
+        <h2>T</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('特斯拉')">特斯拉</li>
+            <li onclick="selectCar('腾势')">腾势</li>
+        </u1>
+
+        <h2>W</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('WEY')">WEY</li>
+            <li class="border-bottom1" onclick="selectCar('威马')">威马</li>
+            <li onclick="selectCar('沃尔沃')">沃尔沃</li>
+        </u1>
+
+        <h2>X</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('现代')">现代</li>
+            <li class="border-bottom1" onclick="selectCar('小鹏')">小鹏</li>
+            <li class="border-bottom1" onclick="selectCar('雪佛兰')">雪佛兰</li>
+        </u1>
+
+        <h2>Y</h2>
+        <u1 class="Car-list">
+            <li class="border-bottom1" onclick="selectCar('蔚来')">蔚来</li>
+            <li class="border-bottom1" onclick="selectCar('英菲尼迪')">英菲尼迪</li>
+        </u1>
+    </div>
+
+
+    <script>
+        function selectCar(CarName) {
+            // 将选择的城市存储在 localStorage 中
+            localStorage.setItem('selectedCar', CarName);
+            // 跳转到 my-car.html 页面
+            window.location.href = 'my-car.html';
+        }
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>操作说明</title>
+    <style>
+        .w100 {width: 100%;}
+        .h100 {height: 100%;}
+        .m0 {margin: 0;}
+        .text-center {text-align:left;}
+        .block {display: block;}
+        .fs16 {font-size: 18px;}
+
+        /* 新增的样式 */
+        .home-button-container {
+            text-align: left;
+            margin-bottom: 20px; /* 调整图标与文字的距离 */
+        }
+        .home-button {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background: url('house-icon.png') no-repeat center center; /* 请确保house-icon.png是你的小房子图标 */
+            background-size: cover;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 小房子按钮 -->
+    <div class="home-button-container">
+        <div class="home-button" onclick="window.location.href='yemian2/zhuye.html' "></div>
+    </div>
+
+    <h1>请使用艾仕得指定小程序扫码鉴别真伪</h1>
+    <div class="w100 h100 m0 text-center fs16">       
+        <div>尊敬的用户：</div>
+        <div style="height: 95px;">因市场存在仿冒伪劣产品，我们已停用微信扫一扫来鉴别产品真伪。请使用官方指定艾仕得服务中心小程序来鉴别产品真伪。</div>       
+        <div>如何找到艾仕得服务中心小程序？</div>
+        <div>1、通过微信主页下拉并搜索“艾仕得服务中心”。</div>
+        <div>2、路径：扫码查询--立即扫码</div>
+        <img src="buzhoutu.jpg" alt="" class="w100 block">
+    </div>    
+</body>
+</html>

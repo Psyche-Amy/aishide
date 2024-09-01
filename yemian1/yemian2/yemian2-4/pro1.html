@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配方管理</title>
+    <style>
+        /* 保留原有样式 */
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            margin: 0px auto;
+        }
+
+        /* 页面顶部的渐变背景区域 */
+        .top-gradient {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 150px; /* 调整为需要的高度 */
+            background: linear-gradient(to bottom, #ffe6e6, #ffffff); /* 从浅红色到白色的渐变 */
+            z-index: -1; /* 确保它在内容后面 */
+        }
+
+
+        /* 居中对齐所有白框 */
+    .white-box {
+        background-color: #ffffff;
+        padding: 15px;
+        margin: 20px auto; /* 上下20px间距，自动水平居中 */
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        width: 87vw;
+        align-items: center;
+    }
+        .label, .value {
+            font-size: 16px;
+            color: #333;
+        }
+        .value {
+            width: 60%;
+            text-align: right;
+        }
+        .van-row {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+        }
+        .van-col {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .van-col img {
+            margin-right: -175px;
+        }
+        .van-col h4 {
+            margin: 0;
+        }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 20vh;
+        }
+        .image-container img {
+            width: 100%;
+            max-width: 100%;
+        }
+        .jinggao1-image {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .jinggao1-image img {
+            width: 100%;
+            height: auto;
+        }
+        .jinggao-image img {
+            width: 100%;
+            height: auto;
+        }
+        .fixed-image {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        .van-col-left {
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <!-- 顶部渐变背景区域 -->
+    <div class="top-gradient"></div>
+
+    <!-- 页面内容 -->
+    <div class="container">
+        <!-- 固定图片 -->
+        <a href="jilu.html">
+            <div class="jinggao1-image"><img src="fan4.jpg" alt="fan4 Image"></div> 
+        </a>
+        
+        <div class="jinggao1-image"><img src="red.jpg" alt="red Image"></div>
+
+        <!-- 白框 1 -->
+        <div class="white-box">
+            <h2>防伪码验证通过</h2>
+            <span>感谢您使用艾仕得产品，我们将持续为您提供优质的产品与服务，如果对扫码结果有疑问，请就近联系艾仕得相关人员，或在工作时间拨打客服热线400-8815995</span>
+        </div>
+
+        <!-- 其他内容继续保持不变 -->
+        <div class="container">
+            <div class="w100" id="verification-box"></div>
+
+            <img src="biaoshi3.jpg" class="fixed-image" alt="右侧固定图片">
+
+            <!-- 产品选择下拉菜单 -->
+            <div class="white-box">
+                <select id="product-select" onchange="fetchProductData()">
+                    <option value="">选择产品</option>
+                    <!-- 产品选项将通过 Ajax 加载 -->
+                </select>
+            </div>
+
+            <!-- 动态显示产品信息 -->
+            <div class="white-box" id="product-info">
+                <div class="van-row">
+                    <div class="van-col" style="margin-right: 315px;">
+                        <img src="biaoshi1.jpg">
+                        <h4>产品信息:</h4>
+                    </div>
+                </div>
+                <div id="product-details">
+                    <!-- 产品详细信息将通过 Ajax 加载 -->
+                </div>
+            </div>
+
+            <div class="white-box">
+                <div id="location-info">
+                    <div class="van-row">
+                        <div class="van-col">
+                            <div class="value van-col-left" id="address" style="font-size: 16px;">正在获取位置...</div>                                         
+                            <div class="value van-col-right" id="time" style="font-size: 16px;">正在获取时间...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="white-box">
+                <div class="van-col">
+                    <img src="biaoshi2.jpg">
+                    <h4>扫码信息:</h4>
+                    <span class="scan-info" id="scan-info">扫码0人0次</span>
+                    <button class="expand-button" id="toggle-log">展开</button>
+                </div>
+                <div id="visit-log" style="display: none; font-size: 16px;"></div>
+            </div>
+
+            <div class="image-container">
+                <img src="jifen.jpg" alt="积分图片">
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        // 页面加载后执行的函数
+        window.onload = function() {
+            fetchProductOptions();
+        };
+    
+        // 使用Ajax加载产品选项
+        function fetchProductOptions() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'productList.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    try {
+                        var options = JSON.parse(xhr.responseText); // 解析 JSON 数据
+                        var select = document.getElementById('product-select');
+                        select.innerHTML = '<option value="">选择产品</option>'; // 清空并重置下拉菜单
+    
+                        if (options.length > 0) {
+                            options.forEach(function(product) {
+                                var option = document.createElement('option');
+                                option.value = product.id;
+                                option.textContent = product.product_code;
+                                select.appendChild(option);
+                            });
+                        } else {
+                            alert('没有可用的产品选项。');
+                        }
+                    } catch (e) {
+                        console.error('解析产品数据时出错:', e);
+                        alert('加载产品选项时出错，请稍后重试。');
+                    }
+                } else {
+                    alert('无法加载产品数据，服务器返回状态码: ' + xhr.status);
+                }
+            };
+            xhr.onerror = function() {
+                alert('请求产品数据时发生错误，请检查网络连接。');
+            };
+            xhr.send();
+        }
+    
+        // 获取选中的产品数据并显示在页面中
+        function fetchProductData() {
+            var productId = document.getElementById('product-select').value;
+            if (1) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'phpinfo.php?id=' + productId, true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        // 在页面上显示产品信息
+                        document.getElementById('product-details').innerHTML = xhr.responseText;
+
+                        // 从响应中提取 product_name 和 fangweima
+                        var parser = new DOMParser();
+                        var doc = parser.parseFromString(xhr.responseText, 'text/html');
+
+                        // 假设我们知道 'product_name' 是第二个 van-row 的 .value
+                        var productNameElement = doc.querySelector('.van-row:nth-child(2) .value');
+                        // 假设 'fangweima' 是第七个 van-row 的 .value
+                        var fangweimaElement = doc.querySelector('.van-row:nth-child(7) .value');
+
+                        if (productNameElement && fangweimaElement) {
+                            var productName = productNameElement.textContent.trim();
+                            var fangweima = fangweimaElement.textContent.trim();
+
+                            // 将 product_name 和 fangweima 保存到 localStorage
+                            var newRecord = {
+                                productName: productName,
+                                fangweima: fangweima
+                            };
+                            localStorage.setItem('product_' + productId, JSON.stringify(newRecord));
+                        } else {
+                            console.error('无法提取产品名称或防伪码');
+                        }
+
+                    } else {
+                        alert('无法加载产品详情，服务器返回状态码: ' + xhr.status);
+                    }
+                };
+                xhr.onerror = function() {
+                    alert('请求产品详情时发生错误，请检查网络连接。');
+                };
+                xhr.send();
+            } else {
+                document.getElementById('product-details').innerHTML = '';
+            }
+        }
+    
+        // 在 DOM 加载完成后执行的函数
+        document.addEventListener("DOMContentLoaded", function () {
+            
+            // 获取访问时间
+            const currentTime = new Date();
+            document.getElementById('time').textContent = currentTime.toLocaleString();
+    
+            // 尝试获取位置
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition, handleLocationError);
+            } else {
+                document.getElementById('address').textContent = "Geolocation 不支持";
+            }
+        });
+    
+        // 显示地理位置信息
+        function showPosition(position) {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+    
+            // 使用逆地理编码API获取具体位置
+            const apiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=zh`;
+    
+            fetch(apiUrl)
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('address').textContent = data.city + ", " + data.principalSubdivision;
+                })
+                .catch(error => {
+                    console.error('获取位置时出错:', error);
+                    document.getElementById('address').textContent = "获取位置失败";
+                });
+        }
+    
+        // 处理地理位置错误
+        function handleLocationError(error) {
+            console.warn(`ERROR(${error.code}): ${error.message}`);
+            document.getElementById('address').textContent = "无法获取位置";
+        }
+    
+        // 扫码统计数据更新函数
+        function updateScanInfo() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', 'scanInfo.php', true);
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.getElementById('scan-info').textContent = xhr.responseText;
+                } else {
+                    console.error('无法更新扫码信息，服务器返回状态码:', xhr.status);
+                }
+            };
+            xhr.onerror = function() {
+                console.error('更新扫码信息时发生错误，请检查网络连接。');
+            };
+            xhr.send();
+        }
+    
+        // 切换访问日志显示函数
+        document.getElementById('toggle-log').addEventListener('click', function() {
+            var log = document.getElementById('visit-log');
+            if (log.style.display === 'none') {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', 'visitLog.php', true);
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        log.innerHTML = xhr.responseText;
+                        log.style.display = 'block';
+                        document.getElementById('toggle-log').textContent = '收起';
+                    } else {
+                        console.error('无法加载访问日志，服务器返回状态码:', xhr.status);
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error('请求访问日志时发生错误，请检查网络连接。');
+                };
+                xhr.send();
+            } else {
+                log.style.display = 'none';
+                document.getElementById('toggle-log').textContent = '展开';
+            }
+        });
+    </script>
+</body>
+</html>

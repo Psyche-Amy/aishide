@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>个人信息</title>
+    <style>
+        .w100{width: 100vw;}
+        /* 图片行样式 */
+        .image-row1 {
+            display: flex;
+         
+            position: fixed;
+            bottom: 0;         
+            left: 0;
+            width: 100vw; /* 全覆盖视口宽度 */
+            background-color: #f0f0f0; /* 浅灰色背景 */
+            padding: 10px 10px; /* 增加上下内边距 */
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+
+        .border-bottom1 {
+            border-bottom: solid thin #cacaca;
+            width: 98vw;
+        }
+
+        .line1 {
+            line-height: 70px;
+        }
+
+        .fs14 {
+            font-size: 14px;
+        }
+
+        .container {
+            background-color: #ffffff; /* 白色背景 */
+            position: relative;
+            margin: 0 auto; /* 居中对齐 */
+        }
+
+        .image-text-row {
+            display: flex;
+            align-items: center; /* 垂直居中对齐 */
+            margin: 15px; /* 设置上下间距 */
+        }
+
+        .shop-info {
+            margin-left: 15px; /* 文字内容距离图片的水平间距 */
+            color: #757575;
+            font-size: 13px;
+        }
+
+        .shop-info .label {
+    background-color: #f9f9f9; /* 浅白色背景 */
+    padding: 3px; /* 内边距 */
+    border-radius: 14px; /* 圆角 */
+    margin-right: 60px; /* 标签间距 */
+    margin-bottom: 2px; /* 标签垂直间距 */
+    text-align: center;
+    width: 110px; /* 设置宽度 */
+    height: 18px; /* 设置高度 */
+    border: 1px solid #d0d0d0; /* 边框颜色和宽度 */
+
+    /* 使标签内容居中对齐 */
+    display: flex;
+    justify-content: center; /* 水平居中 */
+    align-items: center; /* 垂直居中 */
+    
+    /* 新增位置控制 */
+    position: relative; /* 使用相对定位 */
+    top: 0; /* 去除相对定位的偏移 */
+    left: 0; /* 去除相对定位的偏移 */
+}
+
+ 
+
+
+        .shop-info .rating-orders,
+        .shop-info .address-distance {
+            display: flex;
+            justify-content: flex-start; /* 水平对齐方式为左对齐 */
+            margin: 5px 0; /* 设置上下间距 */
+        }
+
+       
+        /* fan3.jpg的白框和阴影 */
+        .image-container {
+            width: 100vw; /* 全覆盖视口宽度 */
+            background-color: #ffffff; /* 白色背景 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+            padding: 2px 0; /* 增加上下内边距 */
+            text-align:left; /* 图片居中对齐 */
+        }
+
+        .image-container img {
+            width: 22%;
+            border: 5px solid #ffffff; /* 白色边框 */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影效果 */
+        }
+    </style><a href="root.html" style="text-decoration: none;">
+            <img src="fan3.jpg" alt="Fan Image">
+        </a>
+    </div>
+
+    <!-- 添加阴影长框 -->
+   
+
+    <div class="container line1" >
+        <div class="border-bottom1">头像</div>
+        <div class="border-bottom1">昵称</div>
+        <div class="border-bottom1">微信手机号</div>
+        <div class="border-bottom1">真实姓名</div>
+        
+        <div class="image-text-row">
+            <h4>我的身份</h4>
+            <div class="shop-info">
+                <div class="rating-orders">
+                    <div class="label">艾仕得经销商</div> 
+                    <div class="label">艾仕得人员</div> 
+                </div>
+                <div class="rating-orders">
+                    <div class="label">店面管理员</div> 
+                    <div class="label">店面喷涂调漆人员</div> 
+                </div>
+                <div class="rating-orders">
+                    <div class="label">分销商or调漆店</div> 
+                    <div class="label">车主</div> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 包含baocun.jpg的容器，背景全覆盖视口宽度 -->
+    <div class="image-row1">
+        <img src="baocun.jpg" alt="Baocun Image" class="w100"> 
+    </div>
+</body>
+</html>

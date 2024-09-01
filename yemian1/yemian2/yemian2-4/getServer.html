@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+<script>
+</script>
+</head>
+<body>
+    <?php
+    $servername = "rm-wz92814fppe3065l1oo.mysql.rds.aliyuncs.com";
+    $username = "root";
+    $password = "RootAmy!@";
+    $dbname = "aishide";
+
+    $mysqllink = mysqli_connect($servername,$username,$password,$dbname);
+    echo "<p>未找到对应的产品信息</p>";
+    mysqli_close($mysqllink);
+    ?>
+<button onclick="fetchUsers()">Fetch Users</button>
+ 
+</body>
+</html>
